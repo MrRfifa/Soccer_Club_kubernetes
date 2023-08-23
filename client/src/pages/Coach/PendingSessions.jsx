@@ -1,0 +1,102 @@
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import swal from "sweetalert";
+import {AuthContext} from "../../context/AuthContext";
+
+const PendingSessions = () => {
+  const [loading, setLoading] = useState(true);
+  const [pendingList, setPendingList] = useState([]);
+  const { username } = useContext(AuthContext);
+
+  useEffect(() => {
+    getPendingSessions();
+  }, []);
+  const getPendingSessions = async () => {
+    await axios.get("http://localhost:3001/admin/getpending").then((res) => {
+      if (res.status === 200) {
+        setPendingList(res.data);
+      }
+      setLoading(false);
+    });
+  };
+
+  const confirmSession = async (e, id) => {
+    e.preventDefault();
+    try {
+      const data = {
+        coachUname: username,
+        confirmed: true,
+      };
+      const result = await axios.put(
+        `http://localhost:3001/coach/confirm-session/${id}`,
+        data
+      );
+      if (result.status === 200) {
+        swal("Success!", result.data.message, "success");
+        getPendingSessions();
+      }
+    } catch (error) {
+      swal("Ooops!", "Error while confirming", "error");
+      console.log(error);
+    }
+  };
+
+  let pendingsessions_HTML_TABLE = "";
+  if (loading) {
+    return <h4>Loading data...</h4>;
+  } else {
+    pendingsessions_HTML_TABLE = pendingList.map((item, index) => {
+      item.date = item.date.slice(0, 16).split("T").join(" ");
+      return (
+        <tr key={index}>
+          <td>{index + 1}</td>
+          <td>{item.date}</td>
+          <td>{item.adminUname}</td>
+
+          <td>
+            <button
+              type="button"
+              className="btn btn-success btn-sm"
+              onClick={(e) => confirmSession(e, item._id)}
+            >
+              Confirm
+            </button>
+          </td>
+        </tr>
+      );
+    });
+  }
+
+  return (
+    <div className="container-fluid px-4 mt-5">
+      <h1
+        style={{
+          marginTop: "100px",
+          marginLeft: "250px",
+        }}
+      >
+        Pending session
+      </h1>
+      <div>
+        <div className="container px-4">
+          <div className="card-body">
+            <div className="badge bg-danger text-wrap">Time zone UTC-2</div>
+            <table className="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Responsible Admin</th>
+                  <th>Confirmation</th>
+                </tr>
+              </thead>
+              <tbody>{pendingsessions_HTML_TABLE}</tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PendingSessions;
