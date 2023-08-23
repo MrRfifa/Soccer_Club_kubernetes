@@ -25,8 +25,8 @@ pipeline {
                     -Dsonar.projectKey=PFE-BACKEND-NODE \
                     -Dsonar.sources=. \
                     -Dsonar.exclusions=**/node_modules/**,**/clones/**,**/test/**,**/uploads/**,*.json,*.log,.*,Dockerfile \
-                    -Dsonar.host.url=http://20.39.234.86:9000 \
-                    -Dsonar.login=${SONAR_TOKEN_BACK}"
+                    -Dsonar.host.url=http://4.178.105.174:9000 \
+                    -Dsonar.login=${SONAR_TOKEN}"
                   ""
                 }
               }
@@ -44,8 +44,8 @@ pipeline {
                   "${scannerHome}/bin/sonar-scanner \
                     -Dsonar.projectKey=PFE-ML-PYTHON \
                     -Dsonar.sources=app.py,functions.py \
-                    -Dsonar.host.url=http://20.39.234.86:9000 \
-                    -Dsonar.login=${SONAR_TOKEN_ML}"
+                    -Dsonar.host.url=http://4.178.105.174:9000 \
+                    -Dsonar.login=${SONAR_TOKEN}"
                   ""
                 }
               }
@@ -63,8 +63,8 @@ pipeline {
                     -Dsonar.projectKey=PFE-FRONTEND-REACT \
                     -Dsonar.sources=./src \
                     -Dsonar.exclusions=**/node_modules/**,**/assets/**,*.json,*.md,.*,Dockerfile,*.css,*.conf \
-                    -Dsonar.host.url=http://20.39.234.86:9000 \
-                    -Dsonar.login=${SONAR_TOKEN_FRONT}"
+                    -Dsonar.host.url=http://4.178.105.174:9000 \
+                    -Dsonar.login=${SONAR_TOKEN}"
                 }
               }
             }
@@ -78,7 +78,7 @@ pipeline {
 
         stage('Build backend image') {
           steps {
-            dir('backend') {
+            dir('server') {
               sh 'docker build -t mrrfifa/soccer-club-server .'
             }
           }
@@ -94,7 +94,7 @@ pipeline {
 
         stage('Build back-office image') {
           steps {
-            dir('frontend') {
+            dir('admin') {
               sh 'docker build -t mrrfifa/soccer-club-admin .'
             }
           }
