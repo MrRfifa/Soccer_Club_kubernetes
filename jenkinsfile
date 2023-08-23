@@ -22,7 +22,7 @@ pipeline {
                 withSonarQubeEnv('sonar') {
                   sh ""
                   "${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=PFE-BACKEND-NODE \
+                    -Dsonar.projectKey=soccer_club \
                     -Dsonar.sources=. \
                     -Dsonar.exclusions=**/node_modules/**,**/clones/**,**/test/**,**/uploads/**,*.json,*.log,.*,Dockerfile \
                     -Dsonar.host.url=http://4.178.105.174:9000 \
@@ -42,7 +42,7 @@ pipeline {
                 withSonarQubeEnv('sonar') {
                   sh ""
                   "${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=PFE-ML-PYTHON \
+                    -Dsonar.projectKey=soccer_club \
                     -Dsonar.sources=app.py,functions.py \
                     -Dsonar.host.url=http://4.178.105.174:9000 \
                     -Dsonar.login=${SONAR_TOKEN}"
@@ -60,7 +60,7 @@ pipeline {
                 def scannerHome = tool 'sonar'
                 withSonarQubeEnv('sonar') {
                   sh "${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=PFE-FRONTEND-REACT \
+                    -Dsonar.projectKey=soccer_club \
                     -Dsonar.sources=./src \
                     -Dsonar.exclusions=**/node_modules/**,**/assets/**,*.json,*.md,.*,Dockerfile,*.css,*.conf \
                     -Dsonar.host.url=http://4.178.105.174:9000 \
