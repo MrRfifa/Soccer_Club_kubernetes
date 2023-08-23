@@ -59,12 +59,13 @@ pipeline {
               script {
                 def scannerHome = tool 'sonar'
                 withSonarQubeEnv('SonarQube') {
-                  sh "${scannerHome}/bin/sonar-scanner \
+                  sh ""
+                  "${scannerHome}/bin/sonar-scanner \
                     -Dsonar.projectKey=back-office \
                     -Dsonar.sources=./src \
-                    -Dsonar.exclusions=**/node_modules/**,**/assets/**,*.json,*.md,.*,Dockerfile,*.css,*.conf \
                     -Dsonar.host.url=http://4.178.105.174:9000 \
                     -Dsonar.login=${SONAR_TOKEN}"
+                  ""
                 }
               }
             }
