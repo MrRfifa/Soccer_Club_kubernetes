@@ -21,7 +21,7 @@ pipeline {
                 def scannerHome = tool 'sonar'
                 withSonarQubeEnv('sonar') {
                   sh ""
-                  "${scannerHome}/bin/sonar-scanner \
+                  "sonar-scanner \
                     -Dsonar.projectKey=soccer_club \
                     -Dsonar.sources=. \
                     -Dsonar.exclusions=**/node_modules/**,**/clones/**,**/test/**,**/uploads/**,*.json,*.log,.*,Dockerfile \
@@ -41,7 +41,7 @@ pipeline {
                 def scannerHome = tool 'sonar'
                 withSonarQubeEnv('sonar') {
                   sh ""
-                  "${scannerHome}/bin/sonar-scanner \
+                  "sonar-scanner \
                     -Dsonar.projectKey=soccer_club \
                     -Dsonar.sources=app.py,functions.py \
                     -Dsonar.host.url=http://4.178.105.174:9000 \
@@ -59,7 +59,7 @@ pipeline {
               script {
                 def scannerHome = tool 'sonar'
                 withSonarQubeEnv('sonar') {
-                  sh "${scannerHome}/bin/sonar-scanner \
+                  sh "sonar-scanner \
                     -Dsonar.projectKey=soccer_club \
                     -Dsonar.sources=./src \
                     -Dsonar.exclusions=**/node_modules/**,**/assets/**,*.json,*.md,.*,Dockerfile,*.css,*.conf \
