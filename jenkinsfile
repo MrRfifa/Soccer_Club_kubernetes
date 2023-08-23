@@ -1,0 +1,114 @@
+pipeline {
+  agent any
+  tools {
+    dockerTool 'docker'
+    nodejs 'node js'
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+
+    stage('Analyses SonarQube') {
+      parallel {
+        stage('SonarQube analysis - Backend') {
+          steps {
+            dir('server') {
+              script {
+                def scannerHome = tool 'sonar'
+                withSonarQubeEnv('sonar') {
+                  sh ""
+                  "${scannerHome}/bin/sonar-scanner \
+                    -Dsonar.projectKey=PFE-BACKEND-NODE \
+                    -Dsonar.sources=. \
+                    -Dsonar.exclusions=**/node_modules/**,**/clones/**,**/test/**,**/uploads/**,*.json,*.log,.*,Dockerfile \
+                    -Dsonar.host.url=http://20.39.234.86:9000 \
+                    -Dsonar.login=${SONAR_TOKEN_BACK}"
+                  ""
+                }
+              }
+            }
+          }
+        }
+
+        stage('SonarQube analysis - front-office') {
+          steps {
+            dir('client') {
+              script {
+                def scannerHome = tool 'sonar'
+                withSonarQubeEnv('sonar') {
+                  sh ""
+                  "${scannerHome}/bin/sonar-scanner \
+                    -Dsonar.projectKey=PFE-ML-PYTHON \
+                    -Dsonar.sources=app.py,functions.py \
+                    -Dsonar.host.url=http://20.39.234.86:9000 \
+                    -Dsonar.login=${SONAR_TOKEN_ML}"
+                  ""
+                }
+              }
+            }
+          }
+        }
+
+        stage('SonarQube analysis - back-office') {
+          steps {
+            dir('admin') {
+              script {
+                def scannerHome = tool 'sonar'
+                withSonarQubeEnv('sonar') {
+                  sh "${scannerHome}/bin/sonar-scanner \
+                    -Dsonar.projectKey=PFE-FRONTEND-REACT \
+                    -Dsonar.sources=./src \
+                    -Dsonar.exclusions=**/node_modules/**,**/assets/**,*.json,*.md,.*,Dockerfile,*.css,*.conf \
+                    -Dsonar.host.url=http://20.39.234.86:9000 \
+                    -Dsonar.login=${SONAR_TOKEN_FRONT}"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    stage('Construction des images') {
+      parallel {
+
+        stage('Build backend image') {
+          steps {
+            dir('backend') {
+              sh 'docker build -t mrrfifa/soccer-club-server .'
+            }
+          }
+        }
+
+        stage('Build front-office image') {
+          steps {
+            dir('client') {
+              sh 'docker build -t mrrfifa/soccer-club-client .'
+            }
+          }
+        }
+
+        stage('Build back-office image') {
+          steps {
+            dir('frontend') {
+              sh 'docker build -t mrrfifa/soccer-club-admin .'
+            }
+          }
+        }
+      }
+    }
+
+    stage('Push images to Docker Hub') {
+      steps {
+        sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+        sh 'docker push mrrfifa/soccer-club-server'
+        sh 'docker push mrrfifa/soccer-club-client'
+        sh 'docker push mrrfifa/soccer-club-admin'
+      }
+    }
+  }
+}

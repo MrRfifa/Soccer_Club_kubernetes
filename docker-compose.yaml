@@ -1,0 +1,52 @@
+version: "3"
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    networks:
+      - mynetwork
+    environment:
+      PORT: 3001
+      MDB_CONNECT: mongodb://root:password@mongodb:27017/my-db?authSource=admin
+      JWT_SECRET: 7014e0105bd8e387ad374ce8b8c542bc2a61cd1f52ade49dfb41bc0c4f12443d
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: my-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mynetwork
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - mynetwork
+
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    networks:
+      - mynetwork
+
+volumes:
+  mongo-data:
+networks:
+  mynetwork:
