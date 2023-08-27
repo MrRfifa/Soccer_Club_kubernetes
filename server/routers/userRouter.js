@@ -121,8 +121,6 @@ router.post("/login", async (req, res) => {
     //send the token in a http-only cookie
     res
       .cookie("token", token, {
-        httpOnly: true,
-        secure: true,
         sameSite: "none",
       })
       .send({ message: "Logged in successfully!" });
