@@ -9,7 +9,7 @@ const Coaches = () => {
     getCoaches();
   }, []);
   const getCoaches = async () => {
-    await axios.get("http://localhost:3001/admin/allcoaches").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/allcoaches`).then((res) => {
       if (res.status === 200) {
         setCoachesList(res.data);
       }

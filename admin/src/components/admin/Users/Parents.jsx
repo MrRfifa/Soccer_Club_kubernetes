@@ -9,7 +9,7 @@ const Parents = () => {
     getParents();
   }, []);
   const getParents = async () => {
-    await axios.get("http://localhost:3001/admin/allparents").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/allparents`).then((res) => {
       if (res.status === 200) {
         setParentsList(res.data);
       }

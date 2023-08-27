@@ -9,7 +9,11 @@ const Navbar = () => {
   const { getLoggedIn } = useContext(AuthContext);
   const logout = async (e) => {
     e.preventDefault();
-    const result = await axios.get("http://localhost:3001/admin/logoutadmin");
+    const result = await axios.get(
+      `http://${import.meta.env.VITE_SERVER_API_URL}:${
+        import.meta.env.VITE_SERVER_PORT
+      }/admin/logoutadmin`
+    );
     await getLoggedIn();
     history("/");
     swal("Success!", result.data.message, "success");

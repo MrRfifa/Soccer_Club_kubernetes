@@ -11,7 +11,7 @@ const Canceled = () => {
     getCanceledSessions();
   }, []);
   const getCanceledSessions = async () => {
-    await axios.get("http://localhost:3001/admin/getcanceled").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/getcanceled`).then((res) => {
       if (res.status === 200) {
         setCanceledList(res.data);
       }

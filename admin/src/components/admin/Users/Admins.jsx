@@ -11,7 +11,7 @@ const Admins = () => {
     getAdmins();
   }, []);
   const getAdmins = async () => {
-    await axios.get("http://localhost:3001/admin/alladmins").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/alladmins`).then((res) => {
       if (res.status === 200) {
         setAdminsList(res.data);
       }

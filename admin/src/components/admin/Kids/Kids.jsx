@@ -10,7 +10,7 @@ const Kids = () => {
     getKids();
   }, []);
   const getKids = async () => {
-    const result = await axios.get("http://localhost:3001/admin/allkids");
+    const result = await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/allkids`);
     if (result.status === 200) {
       setListKids(result.data);
     }
@@ -20,7 +20,7 @@ const Kids = () => {
     e.preventDefault();
     if (window.confirm("Are you sure that you want to delete this kid")) {
       const result = await axios.delete(
-        `http://localhost:3001/admin/delete/${id}`
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/delete/${id}`
       );
       if (result.status === 200) {
         swal("Success!", "kid deleted successfullt", "success");

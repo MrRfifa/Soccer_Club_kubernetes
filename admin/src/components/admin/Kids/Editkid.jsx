@@ -18,7 +18,7 @@ const Editkid = () => {
     }
   }, [id]);
   const getSingleKid = async (id) => {
-    const result = await axios.get(`http://localhost:3001/admin/getkid/${id}`);
+    const result = await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/getkid/${id}`);
     if (result.status === 200) {
       setFirstname(result.data.firstName);
       setLastname(result.data.lastName);
@@ -40,7 +40,7 @@ const Editkid = () => {
         dateOfBirth: date,
       };
       const result = await axios.put(
-        `http://localhost:3001/admin/update/${id}`,
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/update/${id}`,
         data
       );
       if (result.status === 200) {

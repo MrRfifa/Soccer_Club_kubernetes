@@ -10,7 +10,7 @@ const Done = () => {
     getDoneSessions();
   }, []);
   const getDoneSessions = async () => {
-    await axios.get("http://localhost:3001/admin/getdone").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/getdone`).then((res) => {
       if (res.status === 200) {
         setDoneList(res.data);
       }
@@ -23,7 +23,7 @@ const Done = () => {
     try {
       if (window.confirm("Are you sure that you want to delete this session")) {
         const result = await axios.delete(
-          `http://localhost:3001/admin/delete-session/${id}`
+          `http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/delete-session/${id}`
         );
         if (result.status === 200) {
           swal("Success!", result.data.message, "success");

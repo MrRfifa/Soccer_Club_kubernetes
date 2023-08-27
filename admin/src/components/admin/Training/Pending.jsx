@@ -11,12 +11,18 @@ const Pending = () => {
     getPendingSessions();
   }, []);
   const getPendingSessions = async () => {
-    await axios.get("http://localhost:3001/admin/getpending").then((res) => {
-      if (res.status === 200) {
-        setPendingList(res.data);
-      }
-      setLoading(false);
-    });
+    await axios
+      .get(
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/admin/getpending`
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          setPendingList(res.data);
+        }
+        setLoading(false);
+      });
   };
 
   const deleteSession = async (e, id) => {
@@ -24,7 +30,9 @@ const Pending = () => {
     try {
       if (window.confirm("Are you sure that you want to delete this session")) {
         const result = await axios.delete(
-          `http://localhost:3001/admin/delete-non-confirmed/${id}`
+          `http://${import.meta.env.VITE_SERVER_API_URL}:${
+            import.meta.env.VITE_SERVER_PORT
+          }/admin/delete-non-confirmed/${id}`
         );
         if (result.status === 200) {
           swal("Success!", result.data.message, "success");
@@ -42,10 +50,7 @@ const Pending = () => {
     return <h4>Loading data...</h4>;
   } else {
     pendingsessions_HTML_TABLE = pendingList.map((item, index) => {
-      item.date = item.date
-        .slice(0, 16)
-        .split("T")
-        .join(" ");
+      item.date = item.date.slice(0, 16).split("T").join(" ");
       return (
         <tr key={index}>
           <td>{index + 1}</td>

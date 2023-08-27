@@ -10,7 +10,7 @@ const Confirmed = () => {
     getConfirmedSessions();
   }, []);
   const getConfirmedSessions = async () => {
-    await axios.get("http://localhost:3001/admin/getconfirmed").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/getconfirmed`).then((res) => {
       if (res.status === 200) {
         setConfirmedList(res.data);
       }

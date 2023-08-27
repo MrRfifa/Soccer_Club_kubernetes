@@ -9,7 +9,7 @@ const Members = () => {
     getMembers();
   }, []);
   const getMembers = async () => {
-    await axios.get("http://localhost:3001/admin/allmembers").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/allmembers`).then((res) => {
       if (res.status === 200) {
         setMembersList(res.data);
       }

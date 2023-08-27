@@ -25,7 +25,7 @@ const Add = () => {
         done,
       };
       const result = await axios.post(
-        "http://localhost:3001/admin/addsession",
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/addsession`,
         Data
       );
       if (result.status === 200) {

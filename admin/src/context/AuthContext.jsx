@@ -8,7 +8,7 @@ function AuthContextProvider(props) {
   const [username, setUsername] = useState("");
 
   async function getLoggedIn() {
-    const loggedInRes = await axios.get("http://localhost:3001/auth/loggedIn");
+    const loggedInRes = await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/auth/loggedIn`);
 
     setLoggedIn(loggedInRes.data.loggedIn);
     setUsername(loggedInRes.data.username);

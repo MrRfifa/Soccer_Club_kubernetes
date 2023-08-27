@@ -16,7 +16,7 @@ const Login = () => {
         password,
       };
       const result = await axios.post(
-        "http://localhost:3001/admin/loginadmin",
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/loginadmin`,
         Data
       );
       history("/admin/dashboard");

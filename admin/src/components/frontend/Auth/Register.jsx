@@ -19,7 +19,7 @@ const Register = () => {
         passwordVerify,
       };
       const result = await axios.post(
-        "http://localhost:3001/admin/regadmin",
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/regadmin`,
         Data
       );
       history("/admin/dashboard");

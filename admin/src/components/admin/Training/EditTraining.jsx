@@ -24,7 +24,9 @@ const EditTraining = () => {
   const getSingleSession = async (id) => {
     try {
       const result = await axios.get(
-        `http://localhost:3001/admin/get-session/${id}`
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/admin/get-session/${id}`
       );
       if (result.status === 200) {
         const d = new Date(result.data.date).toISOString().slice(0, 16);
@@ -47,7 +49,9 @@ const EditTraining = () => {
         date: date,
       };
       const result = await axios.put(
-        `http://localhost:3001/admin/edit-session/${id}`,
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/admin/edit-session/${id}`,
         newData
       );
       if (result.status === 200) {

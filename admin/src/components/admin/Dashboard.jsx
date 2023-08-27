@@ -11,21 +11,21 @@ const Dashboard = () => {
     getAll();
   }, []);
   const getAll = async () => {
-    const result = await axios.get("http://localhost:3001/admin/allkids");
+    const result = await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/allkids`);
     if (result.status === 200) {
       setListKids(result.data);
     }
-    await axios.get("http://localhost:3001/admin/allparents").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/allparents`).then((res) => {
       if (res.status === 200) {
         setParentsList(res.data);
       }
     });
-    await axios.get("http://localhost:3001/admin/allmembers").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/allmembers`).then((res) => {
       if (res.status === 200) {
         setMembersList(res.data);
       }
     });
-    await axios.get("http://localhost:3001/admin/allcoaches").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/admin/allcoaches`).then((res) => {
       if (res.status === 200) {
         setCoachesList(res.data);
       }
