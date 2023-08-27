@@ -6,12 +6,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
-    networks:
-      - mynetwork
     environment:
       PORT: 3001
       MDB_CONNECT: mongodb://root:password@mongodb:27017/my-db?authSource=admin
       JWT_SECRET: 7014e0105bd8e387ad374ce8b8c542bc2a61cd1f52ade49dfb41bc0c4f12443d
+      CLIENT_API_URL: football_club-client-1
+      CLIENT_PORT: 3000
+      ADMIN_API_URL: football_club-admin-1
+      ADMIN_PORT: 3002
+    networks:
+      - mynetwork
     depends_on:
       - mongodb
 
@@ -32,6 +36,9 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
+    environment:
+      VITE_SERVER_API_URL: football_club-server-1
+      VITE_SERVER_PORT: 3001
     ports:
       - "3000:3000"
     networks:
@@ -41,6 +48,9 @@ services:
     build:
       context: ./admin
       dockerfile: Dockerfile
+    environment:
+      VITE_SERVER_API_URL: football_club-server-1
+      VITE_SERVER_PORT: 3001
     ports:
       - "3002:3002"
     networks:
