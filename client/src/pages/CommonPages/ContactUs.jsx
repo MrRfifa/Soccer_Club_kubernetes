@@ -14,7 +14,7 @@ const ContactUs = () => {
         description,
       };
       await axios
-        .post("http://localhost:3001/auth/contactus", contactData)
+        .post(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/auth/contactus`, contactData)
         .then((res) => {
           if (res.status === 200) {
             toast.success(res.data.message, {

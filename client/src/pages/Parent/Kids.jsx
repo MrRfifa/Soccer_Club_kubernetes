@@ -9,8 +9,11 @@ const Kids = () => {
   useEffect(() => {
     getKids();
   }, []);
+
   const getKids = async () => {
-    const result = await axios.get("http://localhost:3001/kid");
+    const result = await axios.get(
+      `http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/kid`,{ withCredentials: true }
+    );
     if (result.status === 200) {
       setListKids(result.data);
     }
@@ -19,7 +22,7 @@ const Kids = () => {
   const onDeleteKid = async (id) => {
     if (window.confirm("Are you sure that you want to delete this kid")) {
       const result = await axios.delete(
-        `http://localhost:3001/kid/delete/${id}`
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/kid/delete/${id}`,{ withCredentials: true }
       );
       if (result.status === 200) {
         toast.success("Deleted successfully", {

@@ -13,7 +13,11 @@ function AuthContextProvider(props) {
 
   async function getLoggedIn() {
     try {
-      const loggedInRes = await axios.get("http://localhost:3001/auth/loggedIn");
+      const loggedInRes = await axios.get(
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/auth/loggedIn`
+      );
       setLoggedIn(loggedInRes.data.loggedIn);
       setType(loggedInRes.data.type);
       setUserId(loggedInRes.data.userid);
@@ -21,9 +25,7 @@ function AuthContextProvider(props) {
       setLastName(loggedInRes.data.lastName);
       setFirstName(loggedInRes.data.firstName);
     } catch (error) {
-      // Handle error here (e.g., setLoggedIn(false), show an error message, etc.)
       console.error("Error fetching login status:", error);
-      // You can also add more detailed error handling based on the error response
     }
   }
 

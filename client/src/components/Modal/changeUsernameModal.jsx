@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import {AuthContext} from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const ChangeUsernameModal = () => {
   const [newUsername, setNewUsername] = useState("");
@@ -17,7 +17,9 @@ const ChangeUsernameModal = () => {
         password,
       };
       const result = await axios.put(
-        "http://localhost:3001/auth/changeusername",
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/auth/changeusername`,
         newData
       );
       if (result.status === 200) {
@@ -30,7 +32,11 @@ const ChangeUsernameModal = () => {
           draggable: true,
           progress: undefined,
         });
-        await axios.get("http://localhost:3001/auth/logout");
+        await axios.get(
+          `http://${import.meta.env.VITE_SERVER_API_URL}:${
+            import.meta.env.VITE_SERVER_PORT
+          }/auth/logout`
+        );
         await getLoggedIn();
         history("/");
         window.location.reload(false);

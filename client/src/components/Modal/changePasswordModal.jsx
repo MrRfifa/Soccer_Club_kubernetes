@@ -15,7 +15,9 @@ const ChangePasswordModal = () => {
         newPasswordConfirm,
       };
       const result = await axios.put(
-        "http://localhost:3001/auth/changepassword",
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/auth/changepassword`,
         newData
       );
       if (result.status === 200) {

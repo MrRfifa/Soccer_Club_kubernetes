@@ -24,7 +24,7 @@ function AddKids() {
     }
   }, [id]);
   const getSingleKid = async (id) => {
-    const result = await axios.get(`http://localhost:3001/kid/${id}`);
+    const result = await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/kid/${id}`);
     if (result.status === 200) {
       setFirstname(result.data.firstName);
       setLastname(result.data.lastName);
@@ -48,7 +48,7 @@ function AddKids() {
         formData.append("image", filename);
 
         const result = await axios.post(
-          "http://localhost:3001/kid/addKid",
+          `http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/kid/addKid`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
@@ -76,7 +76,7 @@ function AddKids() {
         formData.append("dateOfBirth", date);
         formData.append("image", filename);
         const result = await axios.put(
-          `http://localhost:3001/kid/update/${id}`,
+          `http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/kid/update/${id}`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );

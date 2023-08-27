@@ -9,7 +9,7 @@ const DoneSessions = () => {
     getDoneSessions();
   }, []);
   const getDoneSessions = async () => {
-    await axios.get("http://localhost:3001/coach/getdone").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/coach/getdone`).then((res) => {
       if (res.status === 200) {
         setDoneList(res.data);
       }

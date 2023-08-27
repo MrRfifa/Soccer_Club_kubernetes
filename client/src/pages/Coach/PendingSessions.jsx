@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import swal from "sweetalert";
-import {AuthContext} from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const PendingSessions = () => {
   const [loading, setLoading] = useState(true);
@@ -12,12 +12,18 @@ const PendingSessions = () => {
     getPendingSessions();
   }, []);
   const getPendingSessions = async () => {
-    await axios.get("http://localhost:3001/admin/getpending").then((res) => {
-      if (res.status === 200) {
-        setPendingList(res.data);
-      }
-      setLoading(false);
-    });
+    await axios
+      .get(
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/admin/getpending`
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          setPendingList(res.data);
+        }
+        setLoading(false);
+      });
   };
 
   const confirmSession = async (e, id) => {
@@ -28,7 +34,9 @@ const PendingSessions = () => {
         confirmed: true,
       };
       const result = await axios.put(
-        `http://localhost:3001/coach/confirm-session/${id}`,
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/coach/confirm-session/${id}`,
         data
       );
       if (result.status === 200) {

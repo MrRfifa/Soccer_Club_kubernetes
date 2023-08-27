@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import {AuthContext} from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const DeleteProfileModal = () => {
   const [password, setPassword] = useState("");
@@ -12,7 +12,9 @@ const DeleteProfileModal = () => {
     e.preventDefault();
     try {
       const result = await axios.delete(
-        "http://localhost:3001/auth/deleteaccount",
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/auth/deleteaccount`,
         { data: { password: password }, headers: {} }
       );
 
@@ -27,7 +29,11 @@ const DeleteProfileModal = () => {
           progress: undefined,
         });
         console.log("worked");
-        await axios.get("http://localhost:3001/auth/logout");
+        await axios.get(
+          `http://${import.meta.env.VITE_SERVER_API_URL}:${
+            import.meta.env.VITE_SERVER_PORT
+          }/auth/logout`
+        );
         await getLoggedIn();
         history("/");
         window.location.reload(false);

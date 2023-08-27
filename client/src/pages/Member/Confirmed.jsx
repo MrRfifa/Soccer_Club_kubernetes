@@ -13,7 +13,7 @@ const PendingSessions = () => {
     getPendingSessions();
   }, []);
   const getPendingSessions = async () => {
-    await axios.get("http://localhost:3001/member/participated").then((res) => {
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/member/participated`).then((res) => {
       if (res.status === 200) {
         setPendingList(res.data);
       }
@@ -22,7 +22,7 @@ const PendingSessions = () => {
   };
 
   const cancelParticipation = async (id) => {
-    await axios.put(`http://localhost:3001/member/cancel/${id}`).then((res) => {
+    await axios.put(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/member/cancel/${id}`).then((res) => {
       if (res.status === 200) {
         getPendingSessions();
         toast.success(res.data.message, {

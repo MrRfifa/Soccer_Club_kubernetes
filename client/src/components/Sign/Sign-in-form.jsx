@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import swal from "sweetalert";
 
@@ -20,12 +20,16 @@ const SignInForm = () => {
       };
 
       const result = await axios.post(
-        "http://localhost:3001/auth/login",
-        loginData
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/auth/login`,
+        loginData,
       );
 
       const loggedInRes = await axios.get(
-        "http://localhost:3001/auth/loggedIn"
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/auth/loggedIn`,
       );
       const type = loggedInRes.data.type.toLowerCase();
       await getLoggedIn();

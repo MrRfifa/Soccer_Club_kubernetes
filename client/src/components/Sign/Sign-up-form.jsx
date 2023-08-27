@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
@@ -28,8 +28,11 @@ const SignUpForm = () => {
       };
 
       const result = await axios.post(
-        "http://localhost:3001/auth/reg",
-        registerData
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/auth/reg`,
+        registerData,
+        { withCredentials: true }
       );
       swal("Success!", result.data.message, "success");
       await getLoggedIn();

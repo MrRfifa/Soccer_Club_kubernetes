@@ -9,7 +9,7 @@ const UserSidebar = ({ username, UserSidebarData }) => {
   const { getLoggedIn } = useContext(AuthContext);
   const history = useNavigate();
   async function logOut() {
-    await axios.get("http://localhost:3001/auth/logout");
+    await axios.get(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/auth/logout`);
     await getLoggedIn();
     history("/");
   }

@@ -10,19 +10,27 @@ const PendingSessions = () => {
     getPendingSessions();
   }, []);
   const getPendingSessions = async () => {
-    await axios.get("http://localhost:3001/member/getconfirmed").then((res) => {
-      if (res.status === 200) {
-        setPendingList(res.data);
-      }
-      setLoading(false);
-    });
+    await axios
+      .get(
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/member/getconfirmed`
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          setPendingList(res.data);
+        }
+        setLoading(false);
+      });
   };
 
   const confirmSession = async (e, id) => {
     e.preventDefault();
     try {
       const result = await axios.put(
-        `http://localhost:3001/member/participate/${id}`
+        `http://${import.meta.env.VITE_SERVER_API_URL}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/member/participate/${id}`
       );
       if (result.status === 200) {
         swal("Success!", result.data.message, "success");

@@ -16,7 +16,7 @@ const AnonymousContactUsModal = () => {
         description,
       };
       await axios
-        .post("http://localhost:3001/auth/contactanonym", anonymContactData)
+        .post(`http://${import.meta.env.VITE_SERVER_API_URL}:${import.meta.env.VITE_SERVER_PORT}/auth/contactanonym`, anonymContactData)
         .then((res) => {
           if (res.status === 200) {
             toast.success(res.data.message, {
@@ -34,7 +34,7 @@ const AnonymousContactUsModal = () => {
           }
         });
     } catch (error) {
-      toast.error(error.response.data.error);
+      toast.error("error");
     }
   };
 
