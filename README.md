@@ -9,7 +9,7 @@ Welcome to the **Soccer Club Kubernetes Deployment** repository! This repository
 - [Files](#files)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [Run Locally](#Run Locally)
+- [Run Locally](#RunLocally)
 - [Deploy to Cloud (Microsoft Azure)](#Deploy to Cloud (Microsoft Azure))
 - [Contributing](#contributing)
 
