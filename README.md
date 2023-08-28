@@ -296,6 +296,9 @@ Pods list inside the cluster.
 Replicasets list inside the cluster.
 ![replicasets](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/3a3c67e0-d04f-4088-911d-b170c7eedc96)
 
+Services list inside the cluster.
+![services](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/2f34869a-1caa-410a-912f-5f02b99933c6)
+
 ## Contributing
 
 Contributions to this repository are welcome! If you find any issues or want to enhance the deployment process, feel free to create pull requests. Please follow the existing code style and guidelines.
