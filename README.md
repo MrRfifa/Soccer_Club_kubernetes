@@ -278,11 +278,22 @@ Congratulations! Your application will now be deployed and running on your Kuber
 
 ## Screenshots
 
+This is the AKS cluster.
 ![aks_azure](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/2cf02125-c40c-429b-8b31-36758c7fb827)
+
+This shows the pipelne execution for intalling kubectl and azure cli.
 ![kubectl_az_installation](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/6e491f61-de1c-407f-b43e-016b23a1de94)
+
+This shows the entire application's pipeline using Blue Ocean plugin.
 ![blue_ocean](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/daccb24a-b787-4369-b479-15906daf0ae3)
+
+Deployments list inside the cluster.
 ![deployments](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/85b287cc-ea7a-4889-af0a-65913b92060d)
+
+Pods list inside the cluster.
 ![pods](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/e1f359da-90a9-4f0e-94b4-cfddc3702dfb)
+
+Replicasets list inside the cluster.
 ![replicasets](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/3a3c67e0-d04f-4088-911d-b170c7eedc96)
 
 ## Contributing
