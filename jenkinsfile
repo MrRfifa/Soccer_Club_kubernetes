@@ -111,5 +111,44 @@ pipeline {
         sh 'docker push mrrfifa/soccer-club-admin'
       }
     }
+    stage('Set Azure Subscription') {
+            steps {
+                withCredentials([string(credentialsId: 'azure_subscription', variable: 'AZURE_SUBSCRIPTION_ID')]) {
+                    script {
+                        sh "az account set --subscription \${AZURE_SUBSCRIPTION_ID}"
+                    }
+                }
+            }
+        }
+    stage('Retrieve AKS Credentials') {
+            steps {
+                script {
+                    sh 'az aks get-credentials --resource-group $AKS_RESOURCE_GROUP --name $AKS_CLUSTER_NAME'
+                }
+            }
+        }
+
+    stage('Deploy Secrets and ConfigMaps') {
+            steps {
+                script {
+                    def kubectlPath = tool 'kubectl'
+
+                    sh """
+                    ${kubectlPath} apply -f kubernetes/general
+                    """
+                }
+            }
+        }
+    stage('Deploy to AKS') {
+            steps {
+                script {
+                    def kubectlPath = tool 'kubectl'
+
+                    sh """
+                    ${kubectlPath} apply -f kubernetes/app
+                    """
+                }
+            }
+        }
   }
 }
