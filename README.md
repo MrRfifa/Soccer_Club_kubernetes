@@ -18,6 +18,13 @@ Welcome to the **Soccer Club Kubernetes Deployment** repository! This repository
 
 ## Introduction
 The Soccer Club Kubernetes Deployment repository aims to simplify the deployment process of the Soccer Club application using Kubernetes. By utilizing containerization and Kubernetes orchestration, the application can be easily scaled, managed, and maintained in a dynamic environment.
+
+## Kubernetes Cluster Configuration
+
+Here's a visual representation of the Kubernetes cluster configuration for the application. This image outlines the different components, services, and their interactions within the cluster.
+
+![soccer-club-Page-1 (1)](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/4df10442-92b8-4033-b2d2-016502daacc0)
+
 # Files
 
 Those are the files that I used.
@@ -267,13 +274,16 @@ Congratulations! Your application will now be deployed and running on your Kuber
 
 ## Tech Stack
 
-
-
+![soccer-club-Page-3 (1)](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/badc70d0-9e8d-40b5-a6a8-3d011b8082c8)
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
+![aks_azure](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/2cf02125-c40c-429b-8b31-36758c7fb827)
+![kubectl_az_installation](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/6e491f61-de1c-407f-b43e-016b23a1de94)
+![blue_ocean](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/daccb24a-b787-4369-b479-15906daf0ae3)
+![deployments](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/85b287cc-ea7a-4889-af0a-65913b92060d)
+![pods](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/e1f359da-90a9-4f0e-94b4-cfddc3702dfb)
+![replicasets](https://github.com/MrRfifa/Soccer_Club_kubernetes/assets/101003527/3a3c67e0-d04f-4088-911d-b170c7eedc96)
 
 ## Contributing
 
