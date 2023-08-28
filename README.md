@@ -11,6 +11,8 @@ Welcome to the **Soccer Club Kubernetes Deployment** repository! This repository
 - [Installation](#installation)
 - [Run Locally](#RunLocally)
 - [Deploy to Cloud (Microsoft Azure)](#Deploy to Cloud (Microsoft Azure))
+- [Tech Stack](#contributing)
+- [Screenshots](#screenshots)
 - [Contributing](#contributing)
 
 
@@ -261,9 +263,6 @@ Once you have set up everything on your Jenkins server, follow these steps to de
 
 Congratulations! Your application will now be deployed and running on your Kubernetes cluster in Microsoft Azure.
 
-## Contributing
-
-Contributions to this repository are welcome! If you find any issues or want to enhance the deployment process, feel free to create pull requests. Please follow the existing code style and guidelines.
 
 
 ## Tech Stack
@@ -275,3 +274,7 @@ Contributions to this repository are welcome! If you find any issues or want to 
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
+
+## Contributing
+
+Contributions to this repository are welcome! If you find any issues or want to enhance the deployment process, feel free to create pull requests. Please follow the existing code style and guidelines.
