@@ -22,10 +22,10 @@ pipeline {
                 withSonarQubeEnv('SonarQube') {
                   sh ""
                   "${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=server \
+                    -Dsonar.projectKey=${PROJECT_KEY_IN_SONAR_SERVER} \
                     -Dsonar.sources=. \
-                    -Dsonar.exclusions=**/node_modules/**,**/clones/**,**/test/**,**/uploads/**,*.json,*.log,.*,Dockerfile \
-                    -Dsonar.host.url=http://4.178.105.174:9000 \
+                    -Dsonar.exclusions=**/node_modules/**,*.json,*.log,.*,Dockerfile \
+                    -Dsonar.host.url=${SONAR_IP_ADDR}:${SONAR_PORT} \
                     -Dsonar.login=${SONAR_TOKEN}"
                   ""
                 }
@@ -42,9 +42,9 @@ pipeline {
                 withSonarQubeEnv('SonarQube') {
                   sh ""
                   "${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=front-office \
+                    -Dsonar.projectKey=${PROJECT_KEY_IN_SONAR_CLIENT} \
                     -Dsonar.sources=./src \
-                    -Dsonar.host.url=http://4.178.105.174:9000 \
+                    -Dsonar.host.url=${SONAR_IP_ADDR}:${SONAR_PORT} \
                     -Dsonar.login=${SONAR_TOKEN}"
                   ""
                 }
@@ -61,9 +61,9 @@ pipeline {
                 withSonarQubeEnv('SonarQube') {
                   sh ""
                   "${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=back-office \
+                    -Dsonar.projectKey=${PROJECT_KEY_IN_SONAR_ADMIN} \
                     -Dsonar.sources=./src \
-                    -Dsonar.host.url=http://4.178.105.174:9000 \
+                    -Dsonar.host.url=${SONAR_IP_ADDR}:${SONAR_PORT} \
                     -Dsonar.login=${SONAR_TOKEN}"
                   ""
                 }
@@ -80,7 +80,7 @@ pipeline {
         stage('Build backend image') {
           steps {
             dir('server') {
-              sh 'docker build -t mrrfifa/soccer-club-server .'
+              sh 'docker build -t <dockerhub-username>/<image-name>:tag .'
             }
           }
         }
@@ -88,7 +88,7 @@ pipeline {
         stage('Build front-office image') {
           steps {
             dir('client') {
-              sh 'docker build -t mrrfifa/soccer-club-client .'
+              sh 'docker build -t <dockerhub-username>/<image-name>:tag .'
             }
           }
         }
@@ -96,7 +96,7 @@ pipeline {
         stage('Build back-office image') {
           steps {
             dir('admin') {
-              sh 'docker build -t mrrfifa/soccer-club-admin .'
+              sh 'docker build -t <dockerhub-username>/<image-name>:tag .'
             }
           }
         }
@@ -106,9 +106,9 @@ pipeline {
     stage('Push images to Docker Hub') {
       steps {
         sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-        sh 'docker push mrrfifa/soccer-club-server'
-        sh 'docker push mrrfifa/soccer-club-client'
-        sh 'docker push mrrfifa/soccer-club-admin'
+        sh 'docker push <dockerhub-username>/<image-name>:tag'
+        sh 'docker push <dockerhub-username>/<image-name>:tag'
+        sh 'docker push <dockerhub-username>/<image-name>:tag'
       }
     }
     stage('Set Azure Subscription') {
